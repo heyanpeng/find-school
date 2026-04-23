@@ -927,7 +927,21 @@ async function loadRawData() {
   return response.json();
 }
 
+function fallbackToListMode(message) {
+  state.mapEnabled = false;
+  state.filters.mapBoundsOnly = false;
+  dom.mapBoundsOnlyInput.checked = false;
+  dom.mapBoundsOnlyInput.disabled = true;
+  const mapContainer = document.getElementById("mapContainer");
+  mapContainer.innerHTML = `<div style='padding:12px;color:#b45309;'>${message}</div>`;
+}
+
 async function initMapSafe() {
+  if (!BAIDU_MAP_AK) {
+    fallbackToListMode("未配置百度地图 AK，当前使用列表模式");
+    return;
+  }
+
   try {
     state.BMap = await loadBaiduMap(BAIDU_MAP_AK);
     if (state.homeLocation) {
@@ -968,12 +982,7 @@ async function initMapSafe() {
       applyHomeLocation(lngLat.lng, lngLat.lat);
     });
   } catch (error) {
-    state.mapEnabled = false;
-    state.filters.mapBoundsOnly = false;
-    dom.mapBoundsOnlyInput.checked = false;
-    dom.mapBoundsOnlyInput.disabled = true;
-    const mapContainer = document.getElementById("mapContainer");
-    mapContainer.innerHTML = "<div style='padding:12px;color:#b45309;'>地图加载失败，当前使用列表模式</div>";
+    fallbackToListMode("地图加载失败，当前使用列表模式");
   }
 }
 
