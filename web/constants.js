@@ -1,6 +1,7 @@
 export const DATA_URL = "./data/chaoyang.json";
 
-export const BAIDU_MAP_AK = "UalDvsiBRhGrZ4eDiiL2a9liPdMU3hWt";
+const runtimeConfig = globalThis.__APP_CONFIG__ ?? {};
+export const BAIDU_MAP_AK = String(runtimeConfig.BAIDU_MAP_AK ?? "").trim();
 
 export const MONTH_COST_BUCKETS = ["<=750", "751-1500", "1501-3000", ">3000", "未知"];
 

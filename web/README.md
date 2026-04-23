@@ -14,7 +14,14 @@ python3 -m http.server 8080
 
 ## 地图配置
 
-在 `web/constants.js` 中设置 `BAIDU_MAP_AK`：
+在 `web/index.html` 中通过运行时配置设置 `BAIDU_MAP_AK`：
+
+```html
+<script>
+  window.__APP_CONFIG__ = window.__APP_CONFIG__ || {};
+  window.__APP_CONFIG__.BAIDU_MAP_AK = "你的百度地图AK";
+</script>
+```
 
 - 可使用本地测试 AK 进行开发。
 - 不要提交真实生产 AK。
