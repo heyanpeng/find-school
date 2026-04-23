@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>找学校</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="screen">
+      <div id="mapContainer" class="map-canvas"></div>
+
+      <aside id="filterPanel" class="floating-panel">
+        <section class="panel-title">
+          <div class="panel-title-head">
+            <h1>找学校</h1>
+            <button
+              id="panelCollapseBtn"
+              type="button"
+              class="panel-collapse-btn"
+              aria-expanded="true"
+              aria-label="收起筛选面板"
+            >
+              <span class="collapse-btn-text">收起</span>
+              <span class="collapse-btn-icon" aria-hidden="true">⌃</span>
+            </button>
+          </div>
+        </section>
+
+        <div id="panelContent" class="panel-content">
+        <section class="panel-meta">
+          <div class="panel-meta-text">
+            <div>
+              <p class="panel-meta-label">筛选结果</p>
+              <p id="resultCount">共 0 条</p>
+            </div>
+          </div>
+          <div class="panel-meta-actions">
+            <button id="exportTxtBtn" type="button" class="ghost-btn panel-meta-action-btn">导出 TXT</button>
+            <button id="copyTxtBtn" type="button" class="ghost-btn panel-meta-action-btn">复制列表</button>
+          </div>
+        </section>
+
+        <section class="top-region-control">
+          <label for="districtSelect" class="top-region-label">区域</label>
+          <select id="districtSelect" class="top-region-select">
+            <option value="东城区">东城区</option>
+            <option value="西城区">西城区</option>
+            <option value="朝阳区" selected>朝阳区</option>
+            <option value="丰台区">丰台区</option>
+            <option value="石景山区">石景山区</option>
+            <option value="海淀区">海淀区</option>
+            <option value="门头沟区">门头沟区</option>
+            <option value="房山区">房山区</option>
+            <option value="通州区">通州区</option>
+            <option value="顺义区">顺义区</option>
+            <option value="昌平区">昌平区</option>
+            <option value="大兴区">大兴区</option>
+            <option value="怀柔区">怀柔区</option>
+            <option value="平谷区">平谷区</option>
+            <option value="密云区">密云区</option>
+            <option value="延庆区">延庆区</option>
+          </select>
+          <label class="checkbox-line top-region-boundary-line">
+            <input id="showDistrictBoundaryInput" type="checkbox" checked />
+            <span>显示行政区划边界</span>
+          </label>
+          <p class="top-region-hint">提示：当前仅朝阳区有数据</p>
+        </section>
+
+        <section class="filter-group">
+          <h3>关键字</h3>
+          <input id="keywordInput" type="text" placeholder="搜索园名/地址/办园特色" />
+        </section>
+
+        <section class="filter-group">
+          <h3>快捷筛选</h3>
+          <label class="checkbox-line">
+            <input id="onlyHasOddsInput" type="checkbox" />
+            <span>仅看有富余学位</span>
+          </label>
+          <div class="near-home-inline">
+            <label class="checkbox-line">
+              <input id="onlyStarredInput" type="checkbox" />
+              <span>仅看星标幼儿园</span>
+              <span id="starredCountText" class="inline-radius-unit">0</span>
+            </label>
+            <button id="clearStarredBtn" type="button" class="ghost-btn near-home-action-btn">清空</button>
+          </div>
+          <label class="checkbox-line">
+            <input id="onlyShowStarredNamesInput" type="checkbox" />
+            <span>仅看星标幼儿园名称</span>
+          </label>
+          <label class="checkbox-line">
+            <input id="mapBoundsOnlyInput" type="checkbox" />
+            <span>仅看当前地图范围</span>
+          </label>
+          <div class="near-home-inline">
+            <label class="checkbox-line">
+            <input id="onlyNearHomeInput" type="checkbox" />
+            <span>仅看我家附近</span>
+            <select id="homeRadiusSelect" class="inline-radius-select"></select>
+            <span class="inline-radius-unit">公里</span>
+            </label>
+            <button id="homePointActionBtn" type="button" class="ghost-btn near-home-action-btn">设置</button>
+          </div>
+          <p id="homeLocationText" class="near-home-hint">我家位置：未设置</p>
+        </section>
+
+        <section class="filter-group">
+          <h3>招生状态</h3>
+          <div id="applyStatusFacet" class="facet-list"></div>
+        </section>
+
+        <section class="filter-group">
+          <h3>办园属性</h3>
+          <div class="facet-block">
+            <h4>普惠类型</h4>
+            <div id="inclusiveFacet" class="facet-list"></div>
+          </div>
+          <div class="facet-block">
+            <h4>幼儿园级别</h4>
+            <div id="levelFacet" class="facet-list"></div>
+          </div>
+          <div class="facet-block">
+            <h4>办园性质</h4>
+            <div id="natureFacet" class="facet-list"></div>
+          </div>
+        </section>
+
+        <section class="filter-group">
+          <h3>费用与监管</h3>
+          <div class="facet-block">
+            <h4>基础月费分档</h4>
+            <div id="monthCostFacet" class="facet-list"></div>
+          </div>
+          <div class="facet-block">
+            <h4>督导评级</h4>
+            <div id="superviseFacet" class="facet-list"></div>
+          </div>
+        </section>
+
+        <section class="filter-group">
+          <h3>区域</h3>
+          <div class="facet-block">
+            <h4>街道</h4>
+            <div id="streetFacet" class="facet-list"></div>
+          </div>
+        </section>
+
+        <section class="panel-footer">
+          <button id="resetBtn" type="button" class="primary panel-reset-btn">重置</button>
+          <p class="panel-source-text">数据来源：<a href="https://yery.bjchyedu.cn/" target="_blank" rel="noopener noreferrer">朝阳区幼儿园入院登记报名服务平台</a></p>
+        </section>
+        </div>
+      </aside>
+
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
