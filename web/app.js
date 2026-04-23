@@ -521,7 +521,7 @@ function renderFilters(facets) {
 
 function setSummary(total, mapCount) {
   dom.resultCount.textContent = `共 ${total} 所（地图可见 ${mapCount} 所）`;
-  document.title = `找学校 - ${mapCount}/${total}`;
+  document.title = `find-school - ${mapCount}/${total}`;
 }
 
 function pad2(value) {
@@ -535,7 +535,7 @@ function formatExportDate(date) {
 }
 
 function createExportFileName(date = new Date()) {
-  return `找学校-筛选结果-${date.getFullYear()}${pad2(date.getMonth() + 1)}${pad2(date.getDate())}-${pad2(
+  return `find-school-筛选结果-${date.getFullYear()}${pad2(date.getMonth() + 1)}${pad2(date.getDate())}-${pad2(
     date.getHours()
   )}${pad2(date.getMinutes())}${pad2(date.getSeconds())}.txt`;
 }
@@ -555,7 +555,7 @@ function buildExportText(items) {
   if (state.filters.mapBoundsOnly) enabledQuickFilters.push("仅看当前地图范围");
 
   const lines = [
-    "找学校 - 幼儿园筛选结果",
+    "find-school - 幼儿园筛选结果",
     `导出时间：${formatExportDate(now)}`,
     `筛选区域：${normalizeDistrict(state.filters.district, "朝阳区")}`,
     `关键字：${normalizeExportText(state.filters.keyword, "无")}`,

@@ -10,11 +10,11 @@ python3 -m http.server 8080
 
 2. 浏览器打开：
 
-`http://localhost:8080/web/nursery/index.html`
+`http://localhost:8080/web/index.html`
 
 ## 地图配置
 
-在 `web/nursery/constants.js` 中设置 `BAIDU_MAP_AK`：
+在 `web/constants.js` 中设置 `BAIDU_MAP_AK`：
 
 - 可使用本地测试 AK 进行开发。
 - 不要提交真实生产 AK。
