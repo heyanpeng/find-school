@@ -22,5 +22,5 @@ python3 -m http.server 8080
 
 ## 数据源
 
-- 默认读取：`data/chaoyang.json`
+- 默认读取：`web/data/chaoyang.json`
 - 页面必须通过本地 HTTP 服务访问，不支持直接 `file://` 打开。

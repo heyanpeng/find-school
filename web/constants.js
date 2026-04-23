@@ -1,4 +1,4 @@
-export const DATA_URL = "../../data/chaoyang.json";
+export const DATA_URL = "./data/chaoyang.json";
 
 export const BAIDU_MAP_AK = "UalDvsiBRhGrZ4eDiiL2a9liPdMU3hWt";
 
